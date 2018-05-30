@@ -1,10 +1,7 @@
 <template>
     <div id="app">
-        <h1 class="title-font"><strong>K</strong></h1>
-        <img class="title-img" src="./assets/logo.png">
-        <h1 class="title-font"><strong>NB</strong></h1>
-        <img class="title-img" src="./assets/logo.png">
-        <h1 class="title-font"><strong>N VUE</strong></h1>
+      <h1>KANBAN VUE</h1>
+      <h2>Check out this super crazy font!</h2>
         <router-view/>
       </div>
 </template>

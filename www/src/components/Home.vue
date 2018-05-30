@@ -1,20 +1,20 @@
 <template>
-  <div class="hello">
+  <div class="home">
 
   </div>
 </template>
 
 <script>
+  import router from '../router'
 export default {
-  name: 'HelloWorld',
+  name: 'Home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   },
   mounted(){
     if(!this.$state.store.user._id){
-      router.push({name: 'login'}) // this goes to a login.vue
+      router.push({name: 'Login'}) // this goes to a login.vue
     }
   }
 }
