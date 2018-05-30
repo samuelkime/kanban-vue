@@ -17,15 +17,20 @@ app.use(bp.urlencoded({
 
 // Routes
 var boards = require('./server-assets/routes/boards')
+var lists = require('./server-assets/routes/lists')
+var tasks = require('./server-assets/routes/tasks')
+var comments = require('./server-assets/routes/comments')
 
 app.use(boards.router)
+app.use(lists.router)
+app.use(tasks.router)
+app.use(comments.router)
 
-
-
-
-
-
-
+app.get('*', (req, res, next) => {
+    res.status(404).send({
+      error: 'No matching routes'
+    })
+  })
 
 app.listen(port, () => {
     console.log('server running on port', port)

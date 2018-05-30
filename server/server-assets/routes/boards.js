@@ -54,8 +54,4 @@ router.delete('/api/boards/:id', (req, res) =>{
     })
 })
 
-
-
-
-
 module.exports = { router }
