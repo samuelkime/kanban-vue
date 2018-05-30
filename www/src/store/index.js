@@ -23,6 +23,7 @@ export default new vuex.Store({
   },
   mutations: {
     setUser(state, user) {
+      console.log('setting user ')
       state.user = user
     },
     deleteUser(state) {
@@ -42,10 +43,10 @@ export default new vuex.Store({
     },
     logout({ commit, dispatch }) {
       auth.delete('/logout')
-        .then(res => {
-          console.log("Successfully logged out!")
-          console.log(res)
-          commit('deleteUser')
+      .then(res => {
+        console.log("Successfully logged out!")
+        commit('deleteUser')
+          router.push({name: 'Login'})
         })
     },
     register({ commit, dispatch }, userData) {

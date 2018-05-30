@@ -14,7 +14,9 @@
     export default {
         name: '',
         mounted() {
-            this.$store.dispatch('authenticate')
+            if(!this.$store.state.user._id){
+                this.$store.dispatch('authenticate')
+            }
         },
         data() {
             return {
