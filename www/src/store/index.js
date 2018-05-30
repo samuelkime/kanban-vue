@@ -45,7 +45,7 @@ export default new vuex.Store({
       auth.delete('/logout')
       .then(res => {
         console.log("Successfully logged out!")
-        commit('deleteUser')
+          commit('deleteUser')
           router.push({name: 'Login'})
         })
     },
