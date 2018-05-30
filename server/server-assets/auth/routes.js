@@ -12,10 +12,9 @@ router.post('/auth/register', (req, res) => {
   }
   req.body.hash = Users.generateHash(req.body.password)
   Users.create(req.body)
-    .then(user => {
-      delete user._doc.hash
-      req.session.uid = user._id
-      console.log("successfully registered")
+  .then(user => {
+    delete user._doc.hash
+    req.session.uid = user._id
       res.send(user)
     })
     .catch(err => {
@@ -25,7 +24,7 @@ router.post('/auth/register', (req, res) => {
 
 router.post('/auth/login', (req, res) => {
   Users.findOne({
-      username: req.body.username
+      email: req.body.email
     })
     .then(user => {
       if (!user) {
@@ -41,10 +40,10 @@ router.post('/auth/login', (req, res) => {
     }).catch(err => {
       res.status(400).send(loginError)
     })
-})
-
-router.delete('/auth/logout', (req, res) => {
-  req.session.destroy(err => {
+  })
+  
+  router.delete('/auth/logout', (req, res) => {
+    req.session.destroy(err => {
     if (err) {
       return res.send(err)
     }

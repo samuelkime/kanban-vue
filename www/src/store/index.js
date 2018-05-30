@@ -35,6 +35,7 @@ export default new vuex.Store({
     login({ commit, dispatch }, loginCredentials) {
       auth.post('/login', loginCredentials)
         .then(res => {
+          console.log("successfully logged in!")
           commit('setUser', res.data)
           router.push({ name: 'Home' })
         })
@@ -42,7 +43,9 @@ export default new vuex.Store({
     logout({ commit, dispatch }) {
       auth.delete('/logout')
         .then(res => {
+          console.log("Successfully logged out!")
           console.log(res)
+          commit('deleteUser')
         })
     },
     register({ commit, dispatch }, userData) {
