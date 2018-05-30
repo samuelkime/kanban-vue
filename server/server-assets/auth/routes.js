@@ -15,6 +15,7 @@ router.post('/auth/register', (req, res) => {
     .then(user => {
       delete user._doc.hash
       req.session.uid = user._id
+      console.log("successfully registered")
       res.send(user)
     })
     .catch(err => {

@@ -1,7 +1,6 @@
 <template>
     <div id="app">
       <h1>KANBAN VUE</h1>
-      <h2>Check out this super crazy font!</h2>
         <router-view/>
       </div>
 </template>

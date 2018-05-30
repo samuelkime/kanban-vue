@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-
+<button @click="logout">Logout</button>
   </div>
 </template>
 
@@ -13,8 +13,14 @@ export default {
     }
   },
   mounted(){
-    if(!this.$state.store.user._id){
+    if(!this.$store.state.user._id){
       router.push({name: 'Login'}) // this goes to a login.vue
+    }
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch('logout')
+      router.push('Login')
     }
   }
 }

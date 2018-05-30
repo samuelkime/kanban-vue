@@ -7,7 +7,7 @@ const SALT = 12
 var schema = new Schema({
   username: {type:String,required:true,unique:true},
   email: {type:String,required: true,},
-  hash:{type:String,required:true},
+  password:{type:String,required:true},
   created:{type:Number, required: true, default: Date.now()}
 })
 

@@ -7,12 +7,12 @@ import router from "../router"
 vue.use(vuex)
 
 var api = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'http://localhost:3000',
   timeout: 3000,
   withCredentials: true
 })
 var auth = axios.create({
-  baseURL: 'http://localhost:3000/auth/',
+  baseURL: 'http://localhost:3000/auth',
   timeout: 3000,
   withCredentials: true
 })
@@ -22,34 +22,43 @@ export default new vuex.Store({
     user: {}
   },
   mutations: {
-    setUser(state, user){
+    setUser(state, user) {
       state.user = user
     },
-    deleteUser(state){
+    deleteUser(state) {
       state.user = {}
     }
   },
   actions: {
 
     //AUTH STUFF
-    login({commit, dispatch}, loginCredentials){
-      auth.post('login', loginCredentials)
-        .then(res=>{
+    login({ commit, dispatch }, loginCredentials) {
+      auth.post('/login', loginCredentials)
+        .then(res => {
           commit('setUser', res.data)
-          router.push({name: 'Home'})
+          router.push({ name: 'Home' })
         })
     },
-    logout({commit, dispatch}){
+    logout({ commit, dispatch }) {
+      auth.delete('/logout')
+        .then(res => {
+          console.log(res)
+        })
     },
-    register({commit, dispatch}, userData){
+    register({ commit, dispatch }, userData) {
+      auth.post('/register', userData)
+        .then(res => {
+          commit('setUser', res.data)
+          router.push({ name: 'Home' })
+        })
     },
-    authenticate({commit, dispatch}){
+    authenticate({ commit, dispatch }) {
       api.get('/authenticate')
-        .then(res=>{
+        .then(res => {
           commit('setUser', res.data)
-          router.push({name: 'Home'})
+          router.push({ name: 'Home' })
         })
-        .catch(res=>{
+        .catch(res => {
           console.log(res.data)
         })
     }
