@@ -12,7 +12,7 @@ router.get('/api/boards/:id?', (req, res) => {
                 res.status(400).send(err)
             })
     }
-    Boards.find(req.query)
+    Boards.find({author: req.session.uid})
         .then(boards => {
             res.status(200).send(boards)
         })

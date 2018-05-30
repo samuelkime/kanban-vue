@@ -15,6 +15,19 @@ app.use(bp.urlencoded({
   extended: true
 }))
 
+let auth = require('./server-assets/auth/routes')
+app.use(auth.session)
+app.use(auth.router)
+
+app.use((req,res,next)=>{
+  if(!req.session.uid){
+    return res.status(401).send({
+      error: 'please login to continue'
+    })
+  }
+  next()
+})
+
 // Routes
 var boards = require('./server-assets/routes/boards')
 var lists = require('./server-assets/routes/lists')
