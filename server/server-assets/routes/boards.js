@@ -23,6 +23,7 @@ router.get('/api/boards/:id?', (req, res) => {
 
 // Create board
 router.post('/api/boards', (req, res) =>{
+    req.body.author=req.session.uid
     Boards.create(req.body)
         .then(newBoard =>{
             res.status(200).send(newBoard)

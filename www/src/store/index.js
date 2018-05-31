@@ -23,7 +23,6 @@ export default new vuex.Store({
   },
   mutations: {
     setUser(state, user) {
-      console.log('setting user ')
       state.user = user
     },
     deleteUser(state) {
@@ -52,8 +51,8 @@ export default new vuex.Store({
     register({ commit, dispatch }, userData) {
       auth.post('/register', userData)
         .then(res => {
-          commit('setUser', res.data)
-          router.push({ name: 'Home' })
+          console.log("Registration Successful")  
+          router.push({ name: 'Login' }) // I changed this to just change the component 
         })
     },
     authenticate({ commit, dispatch }) {
