@@ -1,13 +1,18 @@
 <template>
   <div class="home">
+    <allBoards></allBoards>
 <button @click="logout">Logout</button>
   </div>
 </template>
 
 <script>
   import router from '../router'
+  import allBoards from './AllBoards'
 export default {
   name: 'Home',
+  components: {
+    allBoards
+  },
   data () {
     return {
     }

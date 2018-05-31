@@ -7,7 +7,7 @@ import router from "../router"
 vue.use(vuex)
 
 var api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3000/api',
   timeout: 3000,
   withCredentials: true
 })
@@ -19,7 +19,9 @@ var auth = axios.create({
 
 export default new vuex.Store({
   state: {
-    user: {}
+    user: {},
+    AllBoards: [],
+    lists: []
   },
   mutations: {
     setUser(state, user) {
@@ -27,7 +29,14 @@ export default new vuex.Store({
     },
     deleteUser(state) {
       state.user = {}
+    },
+    setBoards(state, boards){
+      state.AllBoards = boards
+    },
+    setLists(state, lists){
+      state.lists = lists
     }
+
   },
   actions: {
 
@@ -64,10 +73,35 @@ export default new vuex.Store({
         .catch(res => {
           console.log(res.data)
         })
-    }
-
+    },
+     
     //APP STUFF
-
+    getAllBoards({dispatch, commit}){
+       api.get('/boards')
+       .then(res =>{
+         console.log(res)
+         commit('setBoards', res.data)
+       })
+    },
+    createBoard({dispatch, commit, state}, board){
+      api.post('/boards', board)
+      .then(res =>{
+        dispatch('getAllBoards', state.user.author)
+      })
+    },
+    getLists({dispatch, commit}){
+      api.get('/lists')
+      .then(res =>{
+        console.log(res)
+        commit('setLists', res.data)
+      })
+   },
+   createList({dispatch, commit, state}, list){
+     api.post('/lists', list)
+     .then(res =>{
+       dispatch('getLists', state.user.author)
+     })
+   },
   }
 })
 
