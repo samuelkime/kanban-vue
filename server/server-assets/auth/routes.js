@@ -21,7 +21,7 @@ router.post('/auth/register', (req, res) => {
       res.status(400).send(err)
     })
 })
-
+// session uid needs to be added to get, push, post
 router.post('/auth/login', (req, res) => {
   Users.findOne({
       email: req.body.email
