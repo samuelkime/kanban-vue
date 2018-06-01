@@ -2,7 +2,7 @@
     <div class="task" id="outline">
         <h3>{{task.body}}</h3>
         <form v-on:submit.prevent="createComment">
-                <input type="text" name="title" placeholder="Comment Title" v-model="comment.body">
+                <input type="text" name="body" placeholder="Comment Title" v-model="comments.body">
                 <button type="submit">Add Comment</button>
             </form>
         <comments :task="task"></comments>
@@ -34,15 +34,15 @@ export default {
     },
     computed:{
         comments(){
-            return this.$store.state.comments;
+            return this.$store.state.allComments;
         },
         tasks(){
-            return this.$store.state.lists;
+            return this.$store.state.tasks;
         }
     },
     methods:{
         createComment(){
-            this.task.boardId = this.board._id
+            this.task.userId = this.user._id
             this.task.listId = this.list._id
             this.$store.dispatch('createTask', this.task)
         }

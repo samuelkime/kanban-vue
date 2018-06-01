@@ -1,16 +1,16 @@
 <template>
     <div class="board" id="outline" v-if="board"> 
         <button @click="backToAllBoards()">Back to My Boards</button>
+        <form v-on:submit.prevent="createList">
+                <input type="text" name="title" placeholder="List Title" v-model="list.title">
+                <button type="submit">Make a List</button>
+            </form>
         <h3>{{board.title}}</h3>
         <button v-for="list in lists">
             <h1>{{board.title}}</h1>
             <h3>{{list.title}}</h3>
             <h3>{{list.author}}</h3>
         </button>
-        <form v-on:submit.prevent="createList">
-                <input type="text" name="title" placeholder="List Title" v-model="list.title">
-                <button type="submit">Make a List</button>
-            </form>
         <list v-for="list in lists" :list="list"></list>
     </div>
 </template>

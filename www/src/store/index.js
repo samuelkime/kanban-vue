@@ -26,7 +26,7 @@ export default new vuex.Store({
     AllBoards: [],
     lists: [],
     tasks: [],
-    comments: []
+    allComments: []
   },
   mutations: {
     setUser(state, user) {
@@ -45,7 +45,7 @@ export default new vuex.Store({
       state.tasks = tasks
     },
     setComments(state, comments){
-      state.comments = comments
+      state.allComments = comments
     }
 
   },

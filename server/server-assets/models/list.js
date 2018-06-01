@@ -5,11 +5,18 @@ var schemaName = 'list'
 
 
 
-let list = new Schema ({
-    title: {type: String, required: true},
-    boardId: {type: ObjectId,
-               ref: 'board',
-               required: true}
+let list = new Schema({
+    title: { type: String, required: true },
+    boardId: {
+        type: ObjectId,
+        ref: 'board',
+        required: true
+    },
+    authorId: {
+        type: ObjectId,
+        ref: 'User',
+        required: true
+    },
 })
 
 

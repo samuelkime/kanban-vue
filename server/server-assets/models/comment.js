@@ -4,19 +4,34 @@ let ObjectId = Schema.Types.ObjectId
 var schemaName = 'comment'
 
 
-let comment = new Schema ({
-    body: {type: String, required: true},
-    authorName: {type: String, required: true},
-    UserId: {
-             type: ObjectId, 
-             ref: 'User', 
-             required: true}
-             ,
+let comment = new Schema({
+    body: { type: String, required: true },
+    username: {
+        type: String,
+        ref: 'User',
+        required: true
+    },
+    authorId: {
+        type: ObjectId,
+        ref: 'User',
+        required: true
+    }
+    ,
     taskId: {
-             type: ObjectId, 
-             ref: 'task', 
-             required: true 
-            }
+        type: ObjectId,
+        ref: 'task',
+        required: true
+    },
+    boardId: {
+        type: ObjectId,
+        ref: 'board',
+        required: true
+    },
+    listId: {
+        type: ObjectId,
+        ref: 'list',
+        required: true
+    }
 })
 
 

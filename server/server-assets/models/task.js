@@ -4,7 +4,7 @@ let ObjectId = Schema.Types.ObjectId
 var schemaName = 'task'
 
 let task = new Schema ({
-    body: {type: String, required: true},
+    title: {type: String, required: true},
     authorName: {type: String, required: true},
     boardId: {type: ObjectId,
                ref: 'board',
@@ -12,7 +12,11 @@ let task = new Schema ({
     },
     listId: {type: ObjectId, 
         ref: 'list', 
-        required: true}
+        required: true
+    },
+    authorId: {type: ObjectId, 
+            ref: 'User', 
+            required: true},
 })
 
 
