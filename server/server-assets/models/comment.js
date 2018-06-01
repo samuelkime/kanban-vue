@@ -7,7 +7,7 @@ var schemaName = 'comment'
 let comment = new Schema ({
     body: {type: String, required: true},
     author: {type: String, required: true},
-    userId: {
+    boardId: {
              type: ObjectId, 
              ref: 'User', 
              required: true}

@@ -26,9 +26,6 @@
                 }
             }
         },
-        mounted() {
-            this.$store.dispatch('getAllBoards')
-        },
         computed: {
             AllBoards() {
                 return this.$store.state.AllBoards;

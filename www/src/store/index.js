@@ -21,7 +21,9 @@ export default new vuex.Store({
   state: {
     user: {},
     AllBoards: [],
-    lists: []
+    lists: [],
+    tasks: [],
+    comments: []
   },
   mutations: {
     setUser(state, user) {
@@ -35,6 +37,12 @@ export default new vuex.Store({
     },
     setLists(state, lists){
       state.lists = lists
+    },
+    setTasks(state, tasks){
+      state.tasks = tasks
+    },
+    setComments(state, comments){
+      state.comments = comments
     }
 
   },
@@ -76,6 +84,8 @@ export default new vuex.Store({
     },
      
     //APP STUFF
+
+    // BOARD
     getAllBoards({dispatch, commit}){
        api.get('/boards')
        .then(res =>{
@@ -89,6 +99,7 @@ export default new vuex.Store({
         dispatch('getAllBoards', state.user.author)
       })
     },
+    // LIST
     getLists({dispatch, commit}){
       api.get('/lists')
       .then(res =>{
@@ -97,11 +108,40 @@ export default new vuex.Store({
       })
    },
    createList({dispatch, commit, state}, list){
+     debugger
      api.post('/lists', list)
      .then(res =>{
        dispatch('getLists', state.user.author)
      })
    },
+  //  TASK
+    getTasks({dispatch, commit}){
+      api.get('/tasks')
+      .then(res =>{
+        console.log(res)
+        commit('setTasks', res.data)
+      })
+    },
+    createTask({dispatch, commit, state}, task){
+      api.post('/tasks', task)
+      .then(res =>{
+        dispatch('getTasks', state.user.author)
+      })
+    },
+    // COMMENTS
+    getComments({dispatch, commit}){
+      api.get('/comments')
+      .then(res =>{
+        console.log(res)
+        commit('setComments', res.data)
+    })
+  },
+    createComment({dispatch, commit, state}, comment){
+      api.post('/comments')
+      .then(res =>{
+        dispatch('getComments', state.user.author)
+      })
+    }
   }
 })
 

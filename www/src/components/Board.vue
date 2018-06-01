@@ -1,8 +1,17 @@
 <template>
-    <div class="board" id="outline">
+    <div class="board" id="outline" v-if="board"> 
         <button @click="backToAllBoards()">Back to My Boards</button>
-        <h3>{{board.name}}</h3>
-        <list :board="board"></list>
+        <h3>{{board.title}}</h3>
+        <button v-for="list in lists">
+            <h1>{{board.title}}</h1>
+            <h3>{{list.title}}</h3>
+            <h3>{{list.author}}</h3>
+        </button>
+        <form v-on:submit.prevent="createList">
+                <input type="text" name="title" placeholder="List Title" v-model="list.title">
+                <button type="submit">Make a List</button>
+            </form>
+        <list v-for="list in lists" :list="list"></list>
     </div>
 </template>
 
@@ -16,17 +25,20 @@
         components: {
             list
         },
+        mounted(){
+            this.$store.dispatch('getLists', this.boardId)
+        },
         data() {
             return {
-                list: {
-                    title: '',
-                    author: '',
-                }
+                list: {}
             }
         },
         computed: {
             board() {
-                return this.$store.state.AllBoards.find(b => b._id == this.boardId) || {}
+                return this.$store.state.AllBoards.find(b => b._id == this.boardId)
+            },
+            lists(){
+                return this.$store.state.lists
             }
         },
         methods: {
@@ -36,6 +48,11 @@
                     name: 'AllBoards'
                 })
             },
+            createList() {
+                this.list.boardId = this.board._id
+                debugger
+                this.$store.dispatch('createList', this.list)
+            }
         }
     }
 </script>

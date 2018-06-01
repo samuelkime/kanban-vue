@@ -1,15 +1,11 @@
 <template>
-    <div class="list" id="outline">
-        <form v-on:submit.prevent="createList">
-            <input type="text" name="title" placeholder="List Title" v-model="list.title">
-            <button type="submit">Make a List</button>
+    <div class="list" id="outline" v-if="list">
+        <form v-on:submit.prevent="createTask">
+            <input type="text" name="title" placeholder="Task Title" v-model="task.body">
+            <input type="text" name="" placeholder="Who's writing this?" v-model="task.authorName">
+            <button type="submit">Add Task</button>
         </form>
-        <button v-for="list in lists">
-            <h3>{{list.title}}</h3>
-            <h3>{{list.author}}</h3>
-            <h1>{{board.title}}</h1>
-        </button>
-        <!-- <task></task> -->
+            <task v-for="task in tasks"></task>
     </div>
 </template>
 
@@ -18,34 +14,39 @@
     import task from './Task'
     export default {
         name: 'list',
+        props:['list'],
         components: {
             task
         },
-        props: ['board'],
+        mounted() {
+            this.$store.dispatch('getTasks', this.list.boardId)
+        },
         data() {
             return {
-                list: {
-                    title: '',
-                    artist: '',
-                    // boardId: ''
-                }
+                task: {
+                    body: '',
+                    authorId: '',
+                    listId: '',
+                    boardId: ''
+                },
             }
         },
-        mounted() {
-            this.$store.dispatch('getLists')
-        },
         computed: {
+            tasks() {
+                return this.$store.state.tasks;
+            },
             lists() {
-
                 return this.$store.state.lists;
             }
         },
         methods: {
-            createList() {
-                this.list.boardId = this.board._id
-                this.$store.dispatch('createList', this.list)
-            }
-        }
+            createTask(){
+            // this.task.authorName = user.username
+            this.task.boardId = this.list.boardId
+            this.task.listId = this.list._id
+            this.$store.dispatch('createTask', this.task)
+        }       
+      }
     }
 </script>
 
