@@ -2,10 +2,10 @@
     <div class="allBoards" id="outline">
         <h3>My Boards</h3>
         <form v-on:submit.prevent="createBoard">
-            <input type="text" name="title" placeholder="Post Title" v-model="board.title">
+            <input type="text" name="title" placeholder="Board Title" v-model="board.title">
             <button type="submit">Make a Board</button>
         </form>
-        <router-link :to="{name: 'Board', params:{boardId: board._id}}" v-for="board in AllBoards" :key="board._id">{{board.title}}</router-link>
+        <router-link :to="{name: 'Board', params:{boardId: board._id}}" v-for="board in boards" :key="board._id">{{board.title}}</router-link>
     </div>
 </template>
 
@@ -22,13 +22,13 @@
             return {
                 board: {
                     title: '',
-                    author: ''
+                    authorId: ''
                 }
             }
         },
         computed: {
-            AllBoards() {
-                return this.$store.state.AllBoards;
+            boards() {
+                return this.$store.state.boards;
             }
         },
         methods: {
@@ -38,6 +38,8 @@
                 })
             },
             createBoard() {
+                debugger
+                this.board.authorId = this.$store.state.user._id
                 this.$store.dispatch('createBoard', this.board)
             }
         }

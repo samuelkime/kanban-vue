@@ -9,7 +9,7 @@
         <button v-for="list in lists">
             <h1>{{board.title}}</h1>
             <h3>{{list.title}}</h3>
-            <h3>{{list.author}}</h3>
+            <h3>{{list.authorId}}</h3>
         </button>
         <list v-for="list in lists" :list="list"></list>
     </div>
@@ -30,12 +30,16 @@
         },
         data() {
             return {
-                list: {}
+                list: {
+                    title: '',
+                    boardId: '',
+                    authorId: ''
+                }
             }
         },
         computed: {
             board() {
-                return this.$store.state.AllBoards.find(b => b._id == this.boardId)
+                return this.$store.state.boards.find(b => b._id == this.boardId)
             },
             lists(){
                 return this.$store.state.lists

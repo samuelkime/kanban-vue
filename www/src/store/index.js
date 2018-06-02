@@ -7,15 +7,15 @@ import router from "../router"
 vue.use(vuex)
 
 var production = !window.location.host.includes('localhost');
-var baseUrl = production ? '//kanban-tastic.herokuapp.com/' : '//localhost:3000/';
+var baseUrl = production ? '//kanban-tastic.herokuapp.com/' : '//localhost:3000';
 
 var api = axios.create({
-  baseURL: baseUrl + "api/",
+  baseURL: baseUrl + "/api",
   timeout: 3000,
   withCredentials: true
 })
 var auth = axios.create({
-  baseURL: baseUrl + "auth/",
+  baseURL: baseUrl + "/auth",
   timeout: 3000,
   withCredentials: true
 })
@@ -23,7 +23,7 @@ var auth = axios.create({
 export default new vuex.Store({
   state: {
     user: {},
-    AllBoards: [],
+    boards: [],
     lists: [],
     tasks: [],
     allComments: []
@@ -36,7 +36,7 @@ export default new vuex.Store({
       state.user = {}
     },
     setBoards(state, boards){
-      state.AllBoards = boards
+      state.boards = boards
     },
     setLists(state, lists){
       state.lists = lists
@@ -90,16 +90,21 @@ export default new vuex.Store({
 
     // BOARD
     getAllBoards({dispatch, commit}){
+      debugger
        api.get('/boards')
        .then(res =>{
+         debugger
          console.log(res)
          commit('setBoards', res.data)
        })
     },
     createBoard({dispatch, commit, state}, board){
+      debugger
       api.post('/boards', board)
       .then(res =>{
-        dispatch('getAllBoards', state.user.author)
+        debugger
+        console.log(res)
+        dispatch('getAllBoards', res)
       })
     },
     // LIST
@@ -114,7 +119,7 @@ export default new vuex.Store({
      debugger
      api.post('/lists', list)
      .then(res =>{
-       dispatch('getLists', state.user.author)
+       dispatch('getLists', state.user.authorId)
      })
    },
   //  TASK
@@ -128,7 +133,7 @@ export default new vuex.Store({
     createTask({dispatch, commit, state}, task){
       api.post('/tasks', task)
       .then(res =>{
-        dispatch('getTasks', state.user.author)
+        dispatch('getTasks', state.user.authorId)
       })
     },
     // COMMENTS
@@ -142,7 +147,7 @@ export default new vuex.Store({
     createComment({dispatch, commit, state}, comment){
       api.post('/comments')
       .then(res =>{
-        dispatch('getComments', state.user.author)
+        dispatch('getComments', state.user.authorId)
       })
     }
   }

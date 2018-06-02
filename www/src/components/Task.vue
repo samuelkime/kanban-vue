@@ -23,9 +23,11 @@ export default {
         return {
             comments:{
                 body:'',
-                authorName:'',
-                userId:'',
-                taskId:''
+                username:'',
+                authorId:'',
+                taskId:'',
+                boardId:'',
+                listId:''
               },
             }
         },

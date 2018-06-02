@@ -5,7 +5,7 @@
             <input type="text" name="" placeholder="Who's writing this?" v-model="task.authorName">
             <button type="submit">Add Task</button>
         </form>
-            <task v-for="task in tasks"></task>
+        <task v-for="task in tasks"></task>
     </div>
 </template>
 
@@ -14,7 +14,7 @@
     import task from './Task'
     export default {
         name: 'list',
-        props:['list'],
+        props: ['list'],
         components: {
             task
         },
@@ -24,10 +24,11 @@
         data() {
             return {
                 task: {
-                    body: '',
-                    authorId: '',
+                    title: '',
+                    authorName: '',
+                    boardId: '',
                     listId: '',
-                    boardId: ''
+                    authorId: ''
                 },
             }
         },
@@ -40,13 +41,13 @@
             }
         },
         methods: {
-            createTask(){
-            // this.task.authorName = user.username
-            this.task.boardId = this.list.boardId
-            this.task.listId = this.list._id
-            this.$store.dispatch('createTask', this.task)
-        }       
-      }
+            createTask() {
+                // this.task.authorName = user.username
+                this.task.boardId = this.list.boardId
+                this.task.listId = this.list._id
+                this.$store.dispatch('createTask', this.task)
+            }
+        }
     }
 </script>
 
