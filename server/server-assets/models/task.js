@@ -5,7 +5,6 @@ var schemaName = 'task'
 
 let task = new Schema ({
     title: {type: String, required: true},
-    authorName: {type: String, required: true},
     boardId: {type: ObjectId,
                ref: 'board',
                required: true

@@ -5,12 +5,10 @@
                 <input type="text" name="title" placeholder="List Title" v-model="list.title">
                 <button type="submit">Make a List</button>
             </form>
-        <h3>{{board.title}}</h3>
-        <button v-for="list in lists">
-            <h1>{{board.title}}</h1>
+        <h3>{{board.title}}<button @click="deleteBoard()">X</button>></h3>
+        <div v-for="list in lists">
             <h3>{{list.title}}</h3>
-            <h3>{{list.authorId}}</h3>
-        </button>
+        </div>
         <list v-for="list in lists" :list="list"></list>
     </div>
 </template>
@@ -53,9 +51,13 @@
                 })
             },
             createList() {
+                this.list.authorId = this.board.authorId
                 this.list.boardId = this.board._id
                 debugger
                 this.$store.dispatch('createList', this.list)
+            },
+            deleteBoard(){
+                this.$store.dispatch('deleteBoard', this.board)
             }
         }
     }

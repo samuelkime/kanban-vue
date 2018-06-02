@@ -11,7 +11,6 @@
 
 export default {
     name: 'comments',
-    props: ['task'],
     components:{},
     data(){
         return {}

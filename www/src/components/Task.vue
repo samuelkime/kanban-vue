@@ -1,11 +1,11 @@
 <template>
     <div class="task" id="outline">
-        <h3>{{task.body}}</h3>
+        <h3>{{task.title}}</h3>
         <form v-on:submit.prevent="createComment">
-                <input type="text" name="body" placeholder="Comment Title" v-model="comments.body">
+                <input type="text" name="body" placeholder="Comment Title" v-model="comment.body">
                 <button type="submit">Add Comment</button>
             </form>
-        <comments :task="task"></comments>
+        <comments :comment="comment in comments"></comments>
 
     </div>
 </template>
@@ -21,7 +21,7 @@ export default {
     },
     data(){
         return {
-            comments:{
+            comment:{
                 body:'',
                 username:'',
                 authorId:'',
@@ -32,21 +32,27 @@ export default {
             }
         },
     mounted() {
-            this.$store.dispatch('getTasks')
+            this.$store.dispatch('getComments', this.task.listId)
     },
     computed:{
-        comments(){
+        allComments(){
             return this.$store.state.allComments;
         },
         tasks(){
             return this.$store.state.tasks;
+        },
+        username(){
+            return this.$store.state.user.username;
         }
     },
     methods:{
         createComment(){
-            this.task.userId = this.user._id
-            this.task.listId = this.list._id
-            this.$store.dispatch('createTask', this.task)
+            this.comment.username = username
+            this.comment.authorId = this.task.authorId
+            this.comment.boardId = this.task.boardId
+            this.comment.listId = this.task.listId
+            this.comment.taskId = this.task._id
+            this.$store.dispatch('createComment', this.comments)
         }
     }
 }

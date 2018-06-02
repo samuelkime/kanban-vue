@@ -89,7 +89,7 @@ export default new vuex.Store({
     //APP STUFF
 
     // BOARD
-    getAllBoards({dispatch, commit}){
+    getAllBoards({dispatch, commit}, user){
       debugger
        api.get('/boards')
        .then(res =>{
@@ -105,6 +105,14 @@ export default new vuex.Store({
         debugger
         console.log(res)
         dispatch('getAllBoards', res)
+      })
+    },
+    editBoard({}){},
+    deleteBoard({dispatch, commit}, board){
+      api.delete('/boards/' + board._id)
+      .then(res =>{
+        dispatch('getAllBoards')
+        router.push({name: 'AllBoards'})
       })
     },
     // LIST
@@ -127,12 +135,14 @@ export default new vuex.Store({
       api.get('/tasks')
       .then(res =>{
         console.log(res)
+        debugger
         commit('setTasks', res.data)
       })
     },
     createTask({dispatch, commit, state}, task){
       api.post('/tasks', task)
       .then(res =>{
+        debugger
         dispatch('getTasks', state.user.authorId)
       })
     },

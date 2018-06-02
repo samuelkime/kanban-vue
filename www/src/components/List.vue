@@ -1,11 +1,10 @@
 <template>
     <div class="list" id="outline" v-if="list">
         <form v-on:submit.prevent="createTask">
-            <input type="text" name="title" placeholder="Task Title" v-model="task.body">
-            <input type="text" name="" placeholder="Who's writing this?" v-model="task.authorName">
+            <input type="text" name="title" placeholder="Task Title" v-model="task.title">
             <button type="submit">Add Task</button>
         </form>
-        <task v-for="task in tasks"></task>
+        <task :task="task" v-for="task in tasks"></task>
     </div>
 </template>
 
@@ -25,7 +24,6 @@
             return {
                 task: {
                     title: '',
-                    authorName: '',
                     boardId: '',
                     listId: '',
                     authorId: ''
@@ -42,9 +40,10 @@
         },
         methods: {
             createTask() {
-                // this.task.authorName = user.username
+                this.task.authorId = this.list.authorId
                 this.task.boardId = this.list.boardId
                 this.task.listId = this.list._id
+                debugger
                 this.$store.dispatch('createTask', this.task)
             }
         }
