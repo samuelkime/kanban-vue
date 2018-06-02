@@ -1,10 +1,10 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
-var schemaName = 'comments'
+var schemaName = 'comment'
 
 
-let comments = new Schema({
+let comment = new Schema({
     body: { type: String, required: true },
     username: {
         type: String,
@@ -35,4 +35,4 @@ let comments = new Schema({
 
 
 
-module.exports = mongoose.model(schemaName, comments)
+module.exports = mongoose.model(schemaName, comment)

@@ -44,8 +44,8 @@ export default new vuex.Store({
     setTasks(state, tasks){
       state.tasks = tasks
     },
-    setComments(state, comments){
-      state.allComments = comments
+    setComments(state, comment){
+      state.allComments = comment
     }
 
   },

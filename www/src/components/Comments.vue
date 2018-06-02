@@ -1,7 +1,7 @@
 <template>
     <div class="comments" id="outline">
-            <h3>{{comment.username}}</h3>
-            <h4>{{comment.body}}</h4>
+        <h3>{{comment.username}}</h3>
+        <h4>{{comment.body}}</h4>
 
     </div>
 </template>
@@ -9,29 +9,34 @@
 
 <script>
 
-export default {
-    name: 'comments',
-    props:['comments'],
-    components:{},
-    data(){
-        return {
-        }
-    },
-    computed:{
-        allComments(){
-            return this.$store.state.allComments;
+    export default {
+        name: 'comments',
+        props: ['comment'],
+        components: {},
+        data() {
+            return {
+                comment: {
+                    body: '',
+                    username: '',
+                    authorId: '',
+                    taskId: '',
+                    boardId: '',
+                    listId: ''
+                },
+            }
         },
-    },
-    methods:{
-        editComment(){},
-        deleteComment(){}
+        computed: {
+        },
+        methods: {
+            editComment() { },
+            deleteComment() { }
+        }
     }
-}
 </script>
 
 
 <style scoped>
-    #outline{
+    #outline {
         border: black solid 1px;
-        }
+    }
 </style>

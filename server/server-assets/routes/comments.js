@@ -23,7 +23,7 @@ router.get('/api/comments/:id?', (req, res) => {
 
 // Create comment
 router.post('/api/comments', (req, res) =>{
-    Comments.create(req.body)
+    Comments.create(req)
         .then(newComment =>{
             res.status(200).send(newComment)
         })

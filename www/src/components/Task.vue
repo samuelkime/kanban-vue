@@ -43,7 +43,7 @@ export default {
         },
     },
     methods:{
-        createComment(){
+        createComment(comment){
             // this.comment.username = username
             this.comment.authorId = this.task.authorId
             this.comment.boardId = this.task.boardId
