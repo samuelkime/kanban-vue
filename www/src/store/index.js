@@ -157,6 +157,7 @@ export default new vuex.Store({
     createComment({dispatch, commit, state}, comment){
       api.post('/comments')
       .then(res =>{
+        debugger
         dispatch('getComments', state.user.authorId)
       })
     }

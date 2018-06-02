@@ -5,7 +5,7 @@
                 <input type="text" name="body" placeholder="Comment Title" v-model="comment.body">
                 <button type="submit">Add Comment</button>
             </form>
-        <comments :comment="comment in comments"></comments>
+        <comments :comment="comment in allComments"></comments>
 
     </div>
 </template>
@@ -41,18 +41,16 @@ export default {
         tasks(){
             return this.$store.state.tasks;
         },
-        username(){
-            return this.$store.state.user.username;
-        }
     },
     methods:{
         createComment(){
-            this.comment.username = username
+            // this.comment.username = username
             this.comment.authorId = this.task.authorId
             this.comment.boardId = this.task.boardId
             this.comment.listId = this.task.listId
             this.comment.taskId = this.task._id
-            this.$store.dispatch('createComment', this.comments)
+            debugger
+            this.$store.dispatch('createComment', this.comment)
         }
     }
 }

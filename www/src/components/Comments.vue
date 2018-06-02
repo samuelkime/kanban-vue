@@ -1,7 +1,7 @@
 <template>
     <div class="comments" id="outline">
-            <h3>comment author</h3>
-            <h4>comment body</h4>
+            <h3>{{comment.username}}</h3>
+            <h4>{{comment.body}}</h4>
 
     </div>
 </template>
@@ -11,12 +11,21 @@
 
 export default {
     name: 'comments',
+    props:['comments'],
     components:{},
     data(){
-        return {}
+        return {
+        }
     },
-    computed:{},
-    methods:{}
+    computed:{
+        allComments(){
+            return this.$store.state.allComments;
+        },
+    },
+    methods:{
+        editComment(){},
+        deleteComment(){}
+    }
 }
 </script>
 
