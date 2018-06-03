@@ -1,5 +1,6 @@
 <template>
     <div class="list" id="outline" v-if="list">
+        <h3>{{list.title}}<button @click="deleteList()">X</button></h3>
         <form v-on:submit.prevent="createTask">
             <input type="text" name="title" placeholder="Task Title" v-model="task.title">
             <button type="submit">Add Task</button>
@@ -18,7 +19,7 @@
             task
         },
         mounted() {
-            this.$store.dispatch('getTasks', this.list.boardId)
+            this.$store.dispatch('getTasks', this.task.listId)
         },
         data() {
             return {
@@ -45,6 +46,9 @@
                 this.task.listId = this.list._id
                 debugger
                 this.$store.dispatch('createTask', this.task)
+            },
+            deleteList(){
+                this.$store.dispatch('deleteList', this.list)
             }
         }
     }

@@ -1,15 +1,12 @@
 <template>
     <div class="board" id="outline" v-if="board"> 
         <button @click="backToAllBoards()">Back to My Boards</button>
+        <h3>{{board.title}}<button @click="deleteBoard()">X</button></h3>
         <form v-on:submit.prevent="createList">
                 <input type="text" name="title" placeholder="List Title" v-model="list.title">
                 <button type="submit">Make a List</button>
             </form>
-        <h3>{{board.title}}<button @click="deleteBoard()">X</button>></h3>
-        <div v-for="list in lists">
-            <h3>{{list.title}}</h3>
-        </div>
-        <list v-for="list in lists" :list="list"></list>
+            <list v-for="list in lists" :list="list"></list>
     </div>
 </template>
 

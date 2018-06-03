@@ -1,6 +1,6 @@
 <template>
     <div class="comments" id="outline">
-            <h3>{{comment.username}}</h3>
+            <h3>{{comment.authorId}}</h3>
             <h4>{{comment.body}}</h4>
 
     </div>
@@ -10,16 +10,16 @@
 <script>
 
 export default {
-    name: 'comments',
-    props:['comments'],
+    name: 'comment',
+    props:['comment'],
     components:{},
     data(){
         return {
         }
     },
     computed:{
-        allComments(){
-            return this.$store.state.allComments;
+        comments(){
+            return this.$store.state.comments;
         },
     },
     methods:{

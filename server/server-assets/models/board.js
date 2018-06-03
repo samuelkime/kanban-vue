@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
-let ObjectId=Schema.Types.ObjectId
+let ObjectId = Schema.Types.ObjectId
 var schemaName = 'board'
 
 

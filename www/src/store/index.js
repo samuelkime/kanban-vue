@@ -26,7 +26,7 @@ export default new vuex.Store({
     boards: [],
     lists: [],
     tasks: [],
-    allComments: []
+    comments: []
   },
   mutations: {
     setUser(state, user) {
@@ -44,8 +44,8 @@ export default new vuex.Store({
     setTasks(state, tasks){
       state.tasks = tasks
     },
-    setComments(state, allComments){
-      state.allComments = allComments
+    setComments(state, comments){
+      state.comments = comments
     }
 
   },
@@ -130,6 +130,13 @@ export default new vuex.Store({
        dispatch('getLists', state.user.authorId)
      })
    },
+   editList({}){},
+   deleteList ({dispatch, commit}, list){
+     api.delete('/lists/'+ list._id)
+     .then(res=>{
+       dispatch('getLists')
+     })
+   },
   //  TASK
     getTasks({dispatch, commit}){
       api.get('/tasks')
@@ -146,6 +153,13 @@ export default new vuex.Store({
         dispatch('getTasks', state.user.authorId)
       })
     },
+    editTask({}){},
+    deleteTask({dispatch, commit}, task){
+      api.delete('/tasks/'+task._id)
+      .then(res=>{
+        dispatch('getTasks')
+      })
+    },
     // COMMENTS
     getComments({dispatch, commit}, user){
       api.get('/comments')
@@ -160,7 +174,15 @@ export default new vuex.Store({
         debugger
         dispatch('getComments', state.user.authorId)
       })
-    }
+    },
+    editComment({}){},
+    deleteComment({dispatch, commit}, comment){
+      api.delete('/comments/'+comment._id)
+      .then(res=>{
+        dispatch('getAllComments')
+        // router.push({name: 'AllComments'})
+      })
+    },
   }
 })
 
