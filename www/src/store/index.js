@@ -122,7 +122,7 @@ export default new vuex.Store({
       })
     },
     // LIST
-    getLists({dispatch, commit}){
+    getLists({dispatch, commit}, user){
       api.get('/lists')
       .then(res =>{
         console.log(res)
@@ -136,7 +136,12 @@ export default new vuex.Store({
        dispatch('getLists', state.user.authorId)
      })
    },
-   editList({}){},
+   editList({dispatch, commit, state}, list){
+    api.put('/lists/' + list._id)
+    .then(res =>{
+      console.log(res)
+    })
+  },
    deleteList ({dispatch, commit}, list){
      api.delete('/lists/'+ list._id)
      .then(res=>{
@@ -144,7 +149,7 @@ export default new vuex.Store({
      })
    },
   //  TASK
-    getTasks({dispatch, commit}, user){
+    getTasks({dispatch, commit}){
       api.get('/tasks')
       .then(res =>{
         console.log(res)
@@ -167,7 +172,7 @@ export default new vuex.Store({
       })
     },
     // COMMENTS
-    getComments({dispatch, commit}){
+    getComments({dispatch, commit}, user){
       debugger
       api.get('/comments')
       .then(res =>{

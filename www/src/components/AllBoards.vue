@@ -1,12 +1,16 @@
 <template>
-    <div class="allBoards" id="outline">
+    <div class="allBoards container">
         <button @click="logout">Logout</button>
         <h3>My Boards</h3>
         <form v-on:submit.prevent="createBoard">
             <input type="text" name="title" placeholder="Board Title" v-model="board.title">
             <button type="submit">Make a Board</button>
         </form>
-        <router-link :to="{name: 'Board', params:{boardId: board._id}}" v-for="board in boards" :key="board._id">{{board.title}}</router-link>
+        <ol class="tmargin">
+            <li class="bmargin" v-for="board in boards" :key="board._id">
+                <router-link :to="{name: 'Board', params:{boardId: board._id}}">{{board.title}}</router-link>
+            </li>
+        </ol>
     </div>
 </template>
 
@@ -54,7 +58,10 @@
 
 
 <style scoped>
-    #outline {
-        border: black solid 1px;
+    .tmargin{
+        margin-top: 5px
+    };
+    .bmargin{
+        margin-bottom: 10px;
     }
 </style>

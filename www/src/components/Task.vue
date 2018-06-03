@@ -1,5 +1,9 @@
 <template>
     <div class="task" id="outline">
+        <form v-on:submit.prevent="editList">
+                <input type="text" name="title" placeholder="New List Name Here" v-model="list.title">
+                <button type="submit">Change List Name</button>
+            </form>
         <h3>{{task.title}}<button @click="deleteTask()">X</button></h3>
         <form v-on:submit.prevent="createComment">
             <input type="text" name="body" placeholder="Comment Title" v-model="comment.body">
@@ -39,7 +43,7 @@
                 return this.$store.state.comments;
             },
             tasks() {
-                return this.$store.state.tasks;
+                return this.$store.state.tasks.find(t => t._id == this.taskId);
             },
         },
         methods: {

@@ -1,9 +1,9 @@
 <template>
-    <div class="board" id="outline" v-if="board"> 
+    <div class="board" v-if="board"> 
         <button @click="backToAllBoards()">Back to My Boards</button>
         <h3>{{board.title}}<button @click="deleteBoard()">X</button></h3>
         <form v-on:submit.prevent="editBoard">
-            <input type="text" name="title" placeholder="" v-model="board.title">
+            <input type="text" name="title" placeholder="New Board Name Here" v-model="board.title">
             <button type="submit">Change Board Name</button>
         </form>
         <form v-on:submit.prevent="createList">
@@ -71,5 +71,5 @@
 <style scoped>
     #outline {
         border: black solid 1px;
-    }
+    }    
 </style>

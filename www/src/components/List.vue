@@ -1,6 +1,10 @@
 <template>
     <div class="list" id="outline" v-if="list">
         <h3>{{list.title}}<button @click="deleteList()">X</button></h3>
+        <form v-on:submit.prevent="editList">
+                <input type="text" name="title" placeholder="New List Name Here" v-model="list.title">
+                <button type="submit">Change List Name</button>
+            </form>
         <form v-on:submit.prevent="createTask">
             <input type="text" name="title" placeholder="Task Title" v-model="task.title">
             <button type="submit">Add Task</button>
@@ -36,7 +40,7 @@
                 return this.$store.state.tasks;
             },
             lists() {
-                return this.$store.state.lists(l => l._id == this.listId);
+                return this.$store.state.lists.find(l => l._id == this.listId);
             }
         },
         methods: {
@@ -46,6 +50,9 @@
                 this.task.listId = this.list._id
                 debugger
                 this.$store.dispatch('createTask', this.task)
+            },
+            editList(){
+                this.$store.dispatch('editList', this.list)
             },
             deleteList(){
                 this.$store.dispatch('deleteList', this.list)
