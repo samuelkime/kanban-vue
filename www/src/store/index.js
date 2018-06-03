@@ -107,7 +107,13 @@ export default new vuex.Store({
         dispatch('getAllBoards', res)
       })
     },
-    editBoard({}){},
+    editBoard({dispatch, commit, state}, board){
+      api.put('/boards/' + board._id)
+      .then(res =>{
+        console.log(res)
+      })
+      
+    },
     deleteBoard({dispatch, commit}, board){
       api.delete('/boards/' + board._id)
       .then(res =>{
@@ -138,7 +144,7 @@ export default new vuex.Store({
      })
    },
   //  TASK
-    getTasks({dispatch, commit}){
+    getTasks({dispatch, commit}, user){
       api.get('/tasks')
       .then(res =>{
         console.log(res)
@@ -180,7 +186,7 @@ export default new vuex.Store({
     deleteComment({dispatch, commit}, comment){
       api.delete('/comments/'+comment._id)
       .then(res=>{
-        dispatch('getAllComments')
+        dispatch('getComments')
         // router.push({name: 'AllComments'})
       })
     },

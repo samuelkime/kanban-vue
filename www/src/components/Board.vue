@@ -2,6 +2,10 @@
     <div class="board" id="outline" v-if="board"> 
         <button @click="backToAllBoards()">Back to My Boards</button>
         <h3>{{board.title}}<button @click="deleteBoard()">X</button></h3>
+        <form v-on:submit.prevent="editBoard">
+            <input type="text" name="title" placeholder="" v-model="board.title">
+            <button type="submit">Change Board Name</button>
+        </form>
         <form v-on:submit.prevent="createList">
                 <input type="text" name="title" placeholder="List Title" v-model="list.title">
                 <button type="submit">Make a List</button>
@@ -52,6 +56,9 @@
                 this.list.boardId = this.board._id
                 debugger
                 this.$store.dispatch('createList', this.list)
+            },
+            editBoard(){
+                this.$store.dispatch('editBoard', this.board)
             },
             deleteBoard(){
                 this.$store.dispatch('deleteBoard', this.board)

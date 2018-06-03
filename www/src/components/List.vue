@@ -36,7 +36,7 @@
                 return this.$store.state.tasks;
             },
             lists() {
-                return this.$store.state.lists;
+                return this.$store.state.lists(l => l._id == this.listId);
             }
         },
         methods: {
