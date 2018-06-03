@@ -5,7 +5,7 @@
                 <input type="text" name="body" placeholder="Comment Title" v-model="comment.body">
                 <button type="submit">Add Comment</button>
             </form>
-        <comments :comment="comment in allComments"></comments>
+        <comments :comments="comments" v-for="comment in allComments"></comments>
 
     </div>
 </template>
@@ -43,7 +43,7 @@ export default {
         },
     },
     methods:{
-        createComment(comment){
+        createComment(){
             // this.comment.username = username
             this.comment.authorId = this.task.authorId
             this.comment.boardId = this.task.boardId

@@ -44,8 +44,8 @@ export default new vuex.Store({
     setTasks(state, tasks){
       state.tasks = tasks
     },
-    setComments(state, comment){
-      state.allComments = comment
+    setComments(state, allComments){
+      state.allComments = allComments
     }
 
   },
@@ -147,14 +147,14 @@ export default new vuex.Store({
       })
     },
     // COMMENTS
-    getComments({dispatch, commit}){
+    getComments({dispatch, commit}, user){
       api.get('/comments')
       .then(res =>{
         console.log(res)
         commit('setComments', res.data)
     })
   },
-    createComment({dispatch, commit, state}, comment){
+    createComment({dispatch, commit, state}, comments){
       api.post('/comments')
       .then(res =>{
         debugger
