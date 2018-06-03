@@ -164,7 +164,12 @@ export default new vuex.Store({
         dispatch('getTasks', state.user.authorId)
       })
     },
-    editTask({}){},
+    editTask({dispatch, commit, state}, task){
+      api.put('/tasks/' + task._id)
+      .then(res =>{
+        console.log(res)
+      })
+    },
     deleteTask({dispatch, commit}, task){
       api.delete('/tasks/'+task._id)
       .then(res=>{

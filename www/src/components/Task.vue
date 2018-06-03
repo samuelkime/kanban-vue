@@ -1,8 +1,8 @@
 <template>
     <div class="task" id="outline">
-        <form v-on:submit.prevent="editList">
-                <input type="text" name="title" placeholder="New List Name Here" v-model="list.title">
-                <button type="submit">Change List Name</button>
+        <form v-on:submit.prevent="editTask">
+                <input type="text" name="title" placeholder="New List Name Here" v-model="task.title">
+                <button type="submit">Change Task Name</button>
             </form>
         <h3>{{task.title}}<button @click="deleteTask()">X</button></h3>
         <form v-on:submit.prevent="createComment">
@@ -55,6 +55,9 @@
                 this.comment.taskId = this.task._id
                 debugger
                 this.$store.dispatch('createComment', this.comment)
+            },
+            editTask(){
+                this.$store.dispatch('editTask', this.task)
             },
             deleteTask() {
                 this.$store.dispatch('deleteTask', this.task)
