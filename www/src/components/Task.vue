@@ -57,7 +57,6 @@
                 this.comment.boardId = this.task.boardId
                 this.comment.listId = this.task.listId
                 this.comment.taskId = this.task._id
-                debugger
                 this.$store.dispatch('createComment', this.comment)
             },
             editTask(){

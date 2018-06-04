@@ -54,7 +54,6 @@
             createList() {
                 this.list.authorId = this.board.authorId
                 this.list.boardId = this.board._id
-                debugger
                 this.$store.dispatch('createList', this.list)
             },
             editBoard(){

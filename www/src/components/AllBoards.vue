@@ -55,7 +55,6 @@
                 })
             },
             createBoard() {
-                debugger
                 this.board.authorId = this.$store.state.user._id
                 this.$store.dispatch('createBoard', this.board)
             }

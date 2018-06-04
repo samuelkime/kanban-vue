@@ -7,7 +7,7 @@ import router from "../router"
 vue.use(vuex)
 
 var production = !window.location.host.includes('localhost');
-var baseUrl = production ? '//kanban-tastic.herokuapp.com/' : '//localhost:3000';
+var baseUrl = production ? '//kanban-tastic.herokuapp.com' : '//localhost:3000';
 
 var api = axios.create({
   baseURL: baseUrl + "/api",
@@ -90,19 +90,15 @@ export default new vuex.Store({
 
     // BOARD
     getAllBoards({dispatch, commit}, user){
-      debugger
        api.get('/boards')
        .then(res =>{
-         debugger
          console.log(res)
          commit('setBoards', res.data)
        })
     },
     createBoard({dispatch, commit, state}, board){
-      debugger
       api.post('/boards', board)
       .then(res =>{
-        debugger
         console.log(res)
         dispatch('getAllBoards', res)
       })
@@ -130,7 +126,6 @@ export default new vuex.Store({
       })
    },
    createList({dispatch, commit, state}, list){
-     debugger
      api.post('/lists', list)
      .then(res =>{
        dispatch('getLists', state.user.authorId)
@@ -153,14 +148,12 @@ export default new vuex.Store({
       api.get('/tasks')
       .then(res =>{
         console.log(res)
-        debugger
         commit('setTasks', res.data)
       })
     },
     createTask({dispatch, commit, state}, task){
       api.post('/tasks', task)
       .then(res =>{
-        debugger
         dispatch('getTasks', state.user.authorId)
       })
     },
@@ -178,7 +171,6 @@ export default new vuex.Store({
     },
     // COMMENTS
     getComments({dispatch, commit}, user){
-      debugger
       api.get('/comments')
       .then(res =>{
         console.log(res)
@@ -188,7 +180,6 @@ export default new vuex.Store({
     createComment({dispatch, commit, state}, comment){
       api.post('/comments', comment)
       .then(res =>{
-        debugger
         dispatch('getComments', state.user.authorId)
       })
     },

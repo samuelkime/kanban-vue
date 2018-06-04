@@ -50,7 +50,6 @@
                 this.task.authorId = this.list.authorId
                 this.task.boardId = this.list.boardId
                 this.task.listId = this.list._id
-                debugger
                 this.$store.dispatch('createTask', this.task)
             },
             editList() {
