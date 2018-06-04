@@ -15,7 +15,10 @@
 </script>
 
 <style>
+  body{
+    background-image: url('./assets/ChalkboardBackground.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 
-  
-
+  }
 </style>
