@@ -1,8 +1,8 @@
 <template>
-    <div class="board" id="outline" v-if="board"> 
+    <div class="board container" id="outline" v-if="board"> 
         <button @click="backToAllBoards()">Back to My Boards</button>
-        <h3>{{board.title}}<button @click="deleteBoard()">X</button></h3>
-        <form v-on:submit.prevent="editBoard">
+        <h3>{{board.title}}    <button @click="deleteBoard()">X</button></h3>
+        <form class="mb-2" v-on:submit.prevent="editBoard">
             <input type="text" name="title" placeholder="New Board Name Here" v-model="board.title">
             <button type="submit">Change Board Name</button>
         </form>
@@ -71,8 +71,13 @@
 <style scoped>
     #outline {
         border: black solid 1px;
-        background-image: url('../assets/CorkBoardBackground.jpg')
-    };
+        background-image: url('../assets/CorkBoardBackground.jpg');
+        text-align: center;
+    }
+    h3{
+        background-color: burlywood;
+        border: sienna solid 2px;
+    }
 
 
         

@@ -17,8 +17,12 @@
 <style>
   body{
     background-image: url('./assets/ChalkboardBackground.jpg');
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-
   }
+  h1{
+    text-align: center;
+    background-color: blanchedalmond
+  }
+
 </style>

@@ -1,8 +1,7 @@
 <template>
-    <div class="comments" id="outline">
-            <h3>{{comment.authorId}}</h3>
-            <h4>{{comment.body}}</h4>
-
+    <div class="comments">
+            <h6><button @click="deleteComment()">X</button></h6>
+            <h5>{{comment.body}}</h5>
     </div>
 </template>
 
@@ -23,8 +22,12 @@ export default {
         },
     },
     methods:{
-        editComment(){},
-        deleteComment(){},
+        editComment(){
+            this.$store.dispatch('editComment', this.comment)
+        },
+        deleteComment(){
+            this.$store.dispatch('deleteComment', this.comment)
+        },
     }
 }
 </script>

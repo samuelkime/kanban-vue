@@ -1,6 +1,7 @@
 <template>
-    <div class="allBoards container">
+    <div class="allBoards container d-flex flex-column align-items-center">
         <button @click="logout">Logout</button>
+        <h3>Welcome Back, {{user.username}}</h3>
         <h3>My Boards</h3>
         <form v-on:submit.prevent="createBoard">
             <input type="text" name="title" placeholder="Board Title" v-model="board.title">
@@ -28,12 +29,18 @@
                 board: {
                     title: '',
                     authorId: ''
+                },
+                user: {
+                    username: ''
                 }
             }
         },
         computed: {
             boards() {
                 return this.$store.state.boards;
+            },
+            user(){
+                return this.$store.state.user.username;
             }
         },
         methods: {

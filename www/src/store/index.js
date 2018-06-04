@@ -192,7 +192,13 @@ export default new vuex.Store({
         dispatch('getComments', state.user.authorId)
       })
     },
-    editComment({}){},
+    editComment({dispatch, commit, state}, comment){
+      api.put('/comments/' + comment._id)
+      .then(res =>{
+        console.log(res)
+        dispatch('getComments', state.user.authorId)
+      })
+    }, 
     deleteComment({dispatch, commit}, comment){
       api.delete('/comments/'+comment._id)
       .then(res=>{
