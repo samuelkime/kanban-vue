@@ -7,10 +7,10 @@ import router from "../router"
 vue.use(vuex)
 
 var production = !window.location.host.includes('localhost');
-var baseUrl = production ? '//kanban-tastic.herokuapp.com' : '//localhost:3000';
+var baseUrl = production ? '//kanban-tastic.herokuapp.com/' : '//localhost:3000';
 
 var api = axios.create({
-  baseURL: baseUrl + "/api",
+  baseURL: baseUrl,
   timeout: 3000,
   withCredentials: true
 })
