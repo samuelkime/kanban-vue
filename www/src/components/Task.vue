@@ -1,16 +1,14 @@
 <template>
-    <div class="task" id="outline">
-        <form v-on:submit.prevent="editTask">
-                <input type="text" name="title" placeholder="New List Name Here" v-model="task.title">
-                <button type="submit">Change Task Name</button>
+    <div class="task d-flex flex-column justify-content-start" id="outline">
+            <form class="form-inline" v-on:submit.prevent="editTask">
+                <input type="text" name="title" placeholder="New Task Name Here" v-model="task.title">     
             </form>
-        <h3>{{task.title}}<button @click="deleteTask()">X</button></h3>
-        <form v-on:submit.prevent="createComment">
-            <input type="text" name="body" placeholder="Comment Title" v-model="comment.body">
-            <button type="submit">Add Comment</button>
-        </form>
+            <h3><button @click="deleteTask()">X</button></h3>
+            <form class="form-inline" v-on:submit.prevent="createComment">
+                <input type="text" name="body" placeholder="Comment Title" v-model="comment.body">
+                <button type="submit">Add Comment</button>
+            </form>
         <comment :comment="comment" v-for="comment in comments"></comment>
-
     </div>
 </template>
 

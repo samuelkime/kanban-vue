@@ -1,5 +1,5 @@
 <template>
-    <div class="board" v-if="board"> 
+    <div class="board" id="outline" v-if="board"> 
         <button @click="backToAllBoards()">Back to My Boards</button>
         <h3>{{board.title}}<button @click="deleteBoard()">X</button></h3>
         <form v-on:submit.prevent="editBoard">
@@ -71,5 +71,9 @@
 <style scoped>
     #outline {
         border: black solid 1px;
-    }    
+        background-image: url('../assets/CorkBoardBackground.jpg')
+    };
+
+
+        
 </style>

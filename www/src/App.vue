@@ -15,17 +15,7 @@
 </script>
 
 <style>
-  #app {
-    font-family: 'Monoton', cursive;
-  }
 
-  .title-img {
-    transform: rotate(180deg);
-    height: 2rem;
-  }
+  
 
-  .title-font {
-    font-family: 'Verdana';
-    height: 3rem;
-  }
 </style>

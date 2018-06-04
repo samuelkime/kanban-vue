@@ -5,10 +5,25 @@ var schemaName = 'User'
 const SALT = 12
 
 var schema = new Schema({
-  username: {type:String,required:true,unique:true},
-  email: {type:String,required: true,},
-  password:{type:String,required:true},
-  created:{type:Number, required: true, default: Date.now()}
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+
+  created: {
+    type: Number,
+    required: true, 
+    default: Date.now()
+  }
 })
 
 schema.statics.generateHash = function (password) {

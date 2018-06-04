@@ -62,6 +62,6 @@
         margin-top: 5px
     };
     .bmargin{
-        margin-bottom: 10px;
+        margin-bottom: 10wpx;
     }
 </style>

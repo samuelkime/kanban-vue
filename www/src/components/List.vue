@@ -1,6 +1,7 @@
 <template>
-    <div class="list" id="outline" v-if="list">
-        <h3>{{list.title}}<button @click="deleteList()">X</button></h3>
+    <div class="list col-4 ml-1 mt-3 mr-2 d-inline-flex flex-column" id="outline" v-if="list">
+        <button @click="deleteList()">X</button>
+            <h3>{{list.title}}</h3>
         <form v-on:submit.prevent="editList">
                 <input type="text" name="title" placeholder="New List Name Here" v-model="list.title">
                 <button type="submit">Change List Name</button>
@@ -9,7 +10,9 @@
             <input type="text" name="title" placeholder="Task Title" v-model="task.title">
             <button type="submit">Add Task</button>
         </form>
-        <task :task="task" v-for="task in tasks"></task>
+        
+                <task :task="task" v-for="task in tasks"></task>
+        
     </div>
 </template>
 

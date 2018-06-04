@@ -2,16 +2,7 @@ var router = require('express').Router()
 var Comments = require('../models/comment')
 
 // Get comment by id or get all comments
-router.get('/api/comments/:id?', (req, res) => {
-    if (req.params.id) {
-        Comments.findById(req.params.id)
-            .then(comment => {
-                return res.status(200).send(comment)
-            })
-            .catch(err => {
-                res.status(400).send(err)
-            })
-    }
+router.get('/api/comments/', (req, res) =>{
     Comments.find(req.query)
         .then(comments => {
             res.status(200).send(comments)
@@ -23,7 +14,7 @@ router.get('/api/comments/:id?', (req, res) => {
 
 // Create comment
 router.post('/api/comments', (req, res) =>{
-    Comments.create(req)
+    Comments.create(req.body)
         .then(newComment =>{
             res.status(200).send(newComment)
         })
