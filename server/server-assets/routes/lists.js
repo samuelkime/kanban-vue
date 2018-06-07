@@ -12,7 +12,7 @@ router.get('/api/lists/:id?', (req, res) => {
                 res.status(400).send(err)
             })
     }
-    Lists.find(req.query)
+    Lists.find({ author: req.session.uid })
         .then(lists => {
             res.status(200).send(lists)
         })
@@ -22,40 +22,48 @@ router.get('/api/lists/:id?', (req, res) => {
 })
 
 // Create list
-router.post('/api/lists', (req, res) =>{
+router.post('/api/lists', (req, res) => {
+    req.body.author = req.session.uid
     Lists.create(req.body)
-        .then(newList =>{
+        .then(newList => {
             res.status(200).send(newList)
         })
-        .catch(err =>{
+        .catch(err => {
             res.status(400).send(err)
         })
 })
 
 // Edit list
-router.put('/api/lists/:id', (req, res) =>{
-    Lists.findByIdAndUpdate(req.params.id, req.body, {new: true})
-    .then(list=>{
-        res.status(200).send({message: 'successfully updated', list})
-    })
-    .catch(err =>{
-        res.status(400).send(err)
-    })
+router.put('/api/lists/:id', (req, res) => {
+    Lists.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        .then(list => {
+            res.status(200).send({ message: 'successfully updated', list })
+        })
+        .catch(err => {
+            res.status(400).send(err)
+        })
 })
 
 // Delete list
-router.delete('/api/lists/:id', (req, res) =>{
+router.delete('/api/lists/:id', (req, res) => {
     Lists.findByIdAndRemove(req.params.id)
-    .then(list=>{
-        res.status(200).send({message: 'successfully deleted'})
-    })
-    .catch(err =>{
-        res.status(400).send(err)
-    })
+        .then(list => {
+            res.status(200).send({ message: 'successfully deleted' })
+        })
+        .catch(err => {
+            res.status(400).send(err)
+        })
 })
 
 
-
+router.get('/api/boards/:boardId/lists', (req, res) => {
+    Lists.find({ boardId: req.params.boardId })
+        .then(lists => {
+            res.send(lists)
+        }).catch(err => {
+            res.status(400).send(err)
+        })
+})
 
 
 module.exports = { router }

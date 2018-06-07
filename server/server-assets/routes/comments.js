@@ -45,6 +45,15 @@ router.delete('/api/comments/:id', (req, res) =>{
     })
 })
 
+router.get('/api/tasks/:taskId/comments', (req, res) =>{
+    Comments.find({taskId: req.params.taskId})
+        .then(comments => {
+            res.send(comments)
+        }).catch(err =>{
+            res.status(400).send(err)
+        })
+})
+
 
 
 

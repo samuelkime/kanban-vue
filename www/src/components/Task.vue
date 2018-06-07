@@ -2,15 +2,21 @@
     <div class="task d-flex flex-column justify-content-start">
         <div class="backgroundPic">
             <h3><button @click="deleteTask()">X</button></h3>
-            <form class="form-inline d-flex justify-content-center" v-on:submit.prevent="editTask">
+            <h3>{{task.title}}</h3>
+            <!-- <form class="form-inline d-flex justify-content-center" v-on:submit.prevent="editTask">
                 <input type="text" name="title" placeholder="New Task Name Here" v-model="task.title">     
-            </form>
+            </form> -->
+            <select v-model="selected">
+                <option disabled value="">Please select one</option>
+                <option v-for="list in lists" :value="list._id">{{list.title}}</option>
+            </select>
+            <button @click="moveTask">Onward!</button>
             <form class="form-inline d-flex justify-content-center" v-on:submit.prevent="createComment">
                 <input type="text" name="body" placeholder="Comment Title" v-model="comment.body">
                 <button type="submit">Add Comment</button>
             </form>
             <ul>
-                <li v-for="comment in comments">
+                <li v-for="comment in comments[task._id]">
                     <comment :comment="comment"></comment>
                 </li>
             </ul>
@@ -28,39 +34,42 @@
             comment
         },
         mounted() {
-            this.$store.dispatch('getComments', this.comment.taskId)
+            this.$store.dispatch('getComments')
         },
         data() {
             return {
                 comment: {
-                    body: '',
-                    username: '',
-                    authorId: '',
-                    taskId: '',
-                    boardId: '',
-                    listId: ''
+                    body: '',    
                 },
+                selected: ''
             }
         },
         computed: {
             comments() {
                 return this.$store.state.comments;
             },
-            tasks() {
-                return this.$store.state.tasks.find(t => t._id == this.taskId);
-            },
+            lists() {
+                return this.$store.state.lists;
+            }
         },
         methods: {
             createComment() {
-                // this.comment.username = username
-                this.comment.authorId = this.task.authorId
-                this.comment.boardId = this.task.boardId
-                this.comment.listId = this.task.listId
+                this.comment.author = this.task.author
                 this.comment.taskId = this.task._id
                 this.$store.dispatch('createComment', this.comment)
+                this.comment = {body: ''}
             },
             editTask(){
                 this.$store.dispatch('editTask', this.task)
+            },
+            moveTask(){
+                if(this.selected == ""){
+                    return
+                }
+                this.task.oldListId = this.task.listId
+                this.task.listId = this.selected
+                this.$store.dispatch('moveTask', this.task)
+                this.selected = ''
             },
             deleteTask() {
                 this.$store.dispatch('deleteTask', this.task)

@@ -12,7 +12,7 @@ router.get('/api/boards/:id?', (req, res) => {
                 res.status(400).send(err)
             })
     }
-    Boards.find({authorId: req.session.uid})
+    Boards.find({author: req.session.uid})
         .then(boards => {
             res.status(200).send(boards)
         })
@@ -23,7 +23,7 @@ router.get('/api/boards/:id?', (req, res) => {
 
 // Create board
 router.post('/api/boards', (req, res) =>{
-    req.body.authorId=req.session.uid
+    req.body.author=req.session.uid
     Boards.create(req.body)
         .then(newBoard =>{
             res.status(200).send(newBoard)
@@ -54,5 +54,6 @@ router.delete('/api/boards/:id', (req, res) =>{
         res.status(400).send(err)
     })
 })
+
 
 module.exports = { router }

@@ -2,15 +2,15 @@
     <div class="list col-4 ml-1 mt-3 mr-2 d-inline-flex flex-column" v-if="list">
         <div class="backgroundPic">
             <h5>{{list.title}}  <button @click="deleteList()">X</button></h5>
-            <form v-on:submit.prevent="editList">
+            <!-- <form v-on:submit.prevent="editList">
                 <input class="mb-1" type="text" name="title" placeholder="New List Name Here" v-model="list.title">
                 <button class="mb-1"  type="submit">^Change List Name^</button>
-            </form>
+            </form> -->
             <form v-on:submit.prevent="createTask">
                 <input class="mb-1" type="text" name="title" placeholder="Task Title" v-model="task.title">
                 <button class="mb-3" type="submit">Add Task</button>
             </form>
-                <task :task="task" v-for="task in tasks"></task>
+                <task :task="task" v-for="task in tasks[list._id]"></task>
         </div>
     </div>
 </template>
@@ -25,32 +25,26 @@
             task
         },
         mounted() {
-            this.$store.dispatch('getTasks', this.task.listId)
+            this.$store.dispatch('getTasks', this.list._id)
         },
         data() {
             return {
                 task: {
                     title: '',
-                    boardId: '',
-                    listId: '',
-                    authorId: ''
                 },
             }
         },
         computed: {
             tasks() {
                 return this.$store.state.tasks;
-            },
-            lists() {
-                return this.$store.state.lists.find(l => l._id == this.listId);
             }
         },
         methods: {
             createTask() {
-                this.task.authorId = this.list.authorId
-                this.task.boardId = this.list.boardId
+                this.task.author = this.list.author
                 this.task.listId = this.list._id
                 this.$store.dispatch('createTask', this.task)
+                this.task = {title: ''}
             },
             editList() {
                 this.$store.dispatch('editList', this.list)

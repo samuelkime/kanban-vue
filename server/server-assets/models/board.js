@@ -5,14 +5,8 @@ var schemaName = 'board'
 
 
 let board = new Schema ({
-    title: {
-        type: String, 
-        required: true
-    },
-    authorId: {
-        type: ObjectId,     
-        required: true
-    }
+    title: {type: String, required: true},
+    author: {type: String, ref: 'User', required: true}
 })
 
 

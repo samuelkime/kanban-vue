@@ -1,16 +1,18 @@
 <template>
-    <div class="board container" id="outline" v-if="board"> 
+    <div class="board container" id="outline" v-if="board">
         <button @click="backToAllBoards()">Back to My Boards</button>
-        <h3>{{board.title}}    <button @click="deleteBoard()">X</button></h3>
+        <h3>{{board.title}}
+            <button @click="deleteBoard()">X</button>
+        </h3>
         <form class="mb-2" v-on:submit.prevent="editBoard">
             <input type="text" name="title" placeholder="New Board Name Here" v-model="board.title">
             <button type="submit">Change Board Name</button>
         </form>
         <form v-on:submit.prevent="createList">
-                <input type="text" name="title" placeholder="List Title" v-model="list.title">
-                <button type="submit">Make a List</button>
-            </form>
-            <list v-for="list in lists" :list="list"></list>
+            <input type="text" name="title" placeholder="List Title" v-model="list.title">
+            <button type="submit">Make a List</button>
+        </form>
+        <list v-for="list in lists" :list="list"></list>
     </div>
 </template>
 
@@ -20,28 +22,31 @@
     import list from './List'
     export default {
         name: 'board',
-        props: ['boardId'],
         components: {
             list
         },
-        mounted(){
-            this.$store.dispatch('getLists', this.boardId)
+        mounted() {
+            this.$store.dispatch('getLists', this.$route.params.boardId)
+            if (!this.$store.state.user._id) {
+                router.push({ name: 'Login' }) // this goes to a login.vue
+            }
         },
         data() {
             return {
                 list: {
-                    title: '',
-                    boardId: '',
-                    authorId: ''
+                    title: ''
                 }
             }
         },
         computed: {
             board() {
-                return this.$store.state.boards.find(b => b._id == this.boardId)
+                return this.$store.state.boards.find(b => b._id == this.$route.params.boardId)
             },
-            lists(){
+            lists() {
                 return this.$store.state.lists
+            },
+            user(){
+                return this.$store.state.user
             }
         },
         methods: {
@@ -52,14 +57,15 @@
                 })
             },
             createList() {
-                this.list.authorId = this.board.authorId
                 this.list.boardId = this.board._id
+                this.list.author = this.user._id
                 this.$store.dispatch('createList', this.list)
+                this.list = { title: '' }
             },
-            editBoard(){
+            editBoard() {
                 this.$store.dispatch('editBoard', this.board)
             },
-            deleteBoard(){
+            deleteBoard() {
                 this.$store.dispatch('deleteBoard', this.board)
             }
         }
@@ -73,11 +79,9 @@
         background-image: url('../assets/CorkBoardBackground.jpg');
         text-align: center;
     }
-    h3{
+
+    h3 {
         background-color: burlywood;
         border: sienna solid 2px;
     }
-
-
-        
 </style>
